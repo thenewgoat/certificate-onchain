@@ -1,29 +1,49 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("SoulboudnCert Soulbound Token", function () {
+describe("SoulboundCert (Soulbound Token)", function () {
   let nftContract, issuer, receiver, minter, other;
 
   beforeEach(async function () {
     // Get four accounts: issuer, receiver, minter, and an extra account.
     [issuer, receiver, minter, other] = await ethers.getSigners();
 
-    const TranscriptNFT = await ethers.getContractFactory("SoulboundCert");
-    // Deploy the contract with: name, symbol, transcript, issuer, minter.
-    nftContract = await TranscriptNFT.connect(issuer).deploy(
-      "SoulboundCert",
-      "TNFT",
-      "Sample Transcript Data",
+    // Deploy the contract with:
+    //  - name = "MyOrgCertificates"
+    //  - symbol = "MOC"
+    //  - contractDescription = "Sample Contract Description"
+    //  - issuer = issuer.address
+    //  - minter = minter.address
+    //  - baseURI = "ipfs://QmBaseURI/"
+    const SoulboundCert = await ethers.getContractFactory("SoulboundCert");
+    nftContract = await SoulboundCert.connect(issuer).deploy(
+      "MyOrgCertificates",
+      "MOC",
+      "Sample Contract Description",
       issuer.address,
-      minter.address
+      minter.address,
+      "ipfs://QmBaseURI/"
     );
     await nftContract.waitForDeployment();
+  });
+
+  describe("Deployment", function () {
+    it("should set the correct contract description, issuer, and base URI", async function () {
+      const contractDesc = await nftContract.contractDescription();
+      expect(contractDesc).to.equal("Sample Contract Description");
+
+      const contractIssuer = await nftContract.issuer();
+      expect(contractIssuer).to.equal(issuer.address);
+
+      // There's no direct getter for baseURI in the contract by default,
+      // but we can test tokenURI to see if it uses the base URI.
+    });
   });
 
   describe("Non-transferability", function () {
     it("should be soulbound (non-transferable)", async function () {
       // Mint a token using the designated minter.
-      const tx = await nftContract.connect(minter).issueToken(receiver.address, 0);
+      const tx = await nftContract.connect(minter).issueCertificate(receiver.address, 0);
       await tx.wait();
 
       // Confirm token 0 is owned by the receiver.
@@ -43,31 +63,30 @@ describe("SoulboudnCert Soulbound Token", function () {
   describe("Issuer-Minter Interactions", function () {
     it("should allow designated minter to mint tokens", async function () {
       // MINTER_ROLE is assigned to 'minter' (not issuer)
-      const tx = await nftContract.connect(minter).issueToken(receiver.address, 0);
+      const tx = await nftContract.connect(minter).issueCertificate(receiver.address, 0);
       await tx.wait();
-  
+
       // Confirm token 0 is owned by the receiver.
       expect(await nftContract.ownerOf(0)).to.equal(receiver.address);
     });
-  
+
     it("should not allow issuer to mint tokens if they are not the designated minter", async function () {
-      // Attempting to call issueToken from the issuer should revert because issuer doesn't have MINTER_ROLE.
+      // Attempting to call issueCertificate from the issuer should revert because issuer doesn't have MINTER_ROLE.
       await expect(
-        nftContract.connect(issuer).issueToken(receiver.address, 0)
+        nftContract.connect(issuer).issueCertificate(receiver.address, 0)
       ).to.be.revertedWith("Caller is not designated minter");
     });
-  
+
     it("should verify that issuer and minter are distinct accounts", async function () {
       // Just confirm that the issuer and minter addresses are different.
       expect(issuer.address).to.not.equal(minter.address);
     });
   });
-  
 
   describe("Burn Authorization Tests", function () {
     it("should allow burning only by the authorized party (IssuerOnly)", async function () {
-      // BurnAuth.IssuerOnly is 0: only the issuer (not the minter) can burn.
-      const tx = await nftContract.connect(minter).issueToken(receiver.address, 0);
+      // BurnAuth.IssuerOnly = 0
+      const tx = await nftContract.connect(minter).issueCertificate(receiver.address, 0);
       await tx.wait();
 
       expect(await nftContract.ownerOf(0)).to.equal(receiver.address);
@@ -88,8 +107,8 @@ describe("SoulboudnCert Soulbound Token", function () {
     });
 
     it("should allow burning only by the token owner (OwnerOnly)", async function () {
-      // BurnAuth.OwnerOnly is 1: only the token owner (receiver) can burn.
-      const tx = await nftContract.connect(minter).issueToken(receiver.address, 1);
+      // BurnAuth.OwnerOnly = 1
+      const tx = await nftContract.connect(minter).issueCertificate(receiver.address, 1);
       await tx.wait();
 
       expect(await nftContract.ownerOf(0)).to.equal(receiver.address);
@@ -109,9 +128,9 @@ describe("SoulboudnCert Soulbound Token", function () {
     });
 
     it("should allow burning by either issuer or token owner (Both)", async function () {
-      // BurnAuth.Both is 2: either issuer or token owner can burn.
+      // BurnAuth.Both = 2
       // Test issuer burning token 0.
-      let tx = await nftContract.connect(minter).issueToken(receiver.address, 2);
+      let tx = await nftContract.connect(minter).issueCertificate(receiver.address, 2);
       await tx.wait();
 
       expect(await nftContract.ownerOf(0)).to.equal(receiver.address);
@@ -126,7 +145,7 @@ describe("SoulboudnCert Soulbound Token", function () {
       await expect(nftContract.ownerOf(0)).to.be.reverted;
 
       // Mint a new token (token 1) with Both authorization.
-      tx = await nftContract.connect(minter).issueToken(receiver.address, 2);
+      tx = await nftContract.connect(minter).issueCertificate(receiver.address, 2);
       await tx.wait();
 
       expect(await nftContract.ownerOf(1)).to.equal(receiver.address);
@@ -142,8 +161,8 @@ describe("SoulboudnCert Soulbound Token", function () {
     });
 
     it("should not allow burning for tokens with Neither authorization", async function () {
-      // BurnAuth.Neither is 3: no one can burn.
-      const tx = await nftContract.connect(minter).issueToken(receiver.address, 3);
+      // BurnAuth.Neither = 3
+      const tx = await nftContract.connect(minter).issueCertificate(receiver.address, 3);
       await tx.wait();
 
       expect(await nftContract.ownerOf(0)).to.equal(receiver.address);
@@ -155,6 +174,21 @@ describe("SoulboudnCert Soulbound Token", function () {
         .to.be.revertedWith("Token is non-burnable");
       await expect(nftContract.connect(receiver).burn(0))
         .to.be.revertedWith("Token is non-burnable");
+    });
+  });
+
+  describe("Base URI Functionality", function () {
+    it("should return the correct tokenURI for minted tokens", async function () {
+      // Suppose the baseURI is "ipfs://QmBaseURI/"
+      // When we mint token 0, tokenURI(0) should be "ipfs://QmBaseURI/0.json"
+
+      // Mint a token with BurnAuth=0
+      const tx = await nftContract.connect(minter).issueCertificate(receiver.address, 0);
+      await tx.wait();
+
+      // Check tokenURI
+      const uri = await nftContract.tokenURI(0);
+      expect(uri).to.equal("ipfs://QmBaseURI/0.json");
     });
   });
 });
