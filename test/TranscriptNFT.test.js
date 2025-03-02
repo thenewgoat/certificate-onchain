@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("TranscriptNFT_ERC5484 Soulbound Token", function () {
+describe("SoulboudnCert Soulbound Token", function () {
   let nftContract, issuer, receiver, minter, other;
 
   beforeEach(async function () {
@@ -11,7 +11,7 @@ describe("TranscriptNFT_ERC5484 Soulbound Token", function () {
     const TranscriptNFT = await ethers.getContractFactory("SoulboundCert");
     // Deploy the contract with: name, symbol, transcript, issuer, minter.
     nftContract = await TranscriptNFT.connect(issuer).deploy(
-      "TranscriptNFT",
+      "SoulboundCert",
       "TNFT",
       "Sample Transcript Data",
       issuer.address,
