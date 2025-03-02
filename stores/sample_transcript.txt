@@ -1,0 +1,171 @@
+{
+  "id": "HIST HD 2025 001",
+  "issuedOn": "2025-06-25T00:00:00+08:00",
+  "attainmentDate": "2025-06-15T00:00:00+08:00",
+  "name": "ARTS (HISTORY)",
+  "degreeTitle": [
+    "Bachelor of Arts",
+    "in History"
+  ],
+  "qualificationLevel": "First degree or equivalent",
+  "classification": "Honours (Distinction)",
+  "totalAcademicUnits": "140",
+  "finalCGPA": "4.10",
+  "remarks": [
+    "COMPLETED THE DEGREE OF BACHELOR OF ARTS IN HISTORY, HONOURS (DISTINCTION)"
+  ],
+
+  "recipient": {
+    "name": "JANE DOE",
+    "idType": "SP",
+    "idNumber": "S1234568A",
+    "dateOfBirth": "01 JANUARY 2002",
+    "email": "JANEDOE@e.university.edu"
+  },
+
+  "issuer": "Example University",
+
+  "transcriptRecords": [
+    {
+      "name": "INTRODUCTION TO WORLD HISTORY",
+      "grade": "A",
+      "courseCode": "HIST1001",
+      "courseCredit": "3",
+      "academicYear": "2021-2022 SEMESTER 1"
+    },
+    {
+      "name": "FOUNDATIONS OF MODERN EUROPE",
+      "grade": "B+",
+      "courseCode": "HIST1002",
+      "courseCredit": "3",
+      "academicYear": "2021-2022 SEMESTER 1"
+    },
+    {
+      "name": "WORLD CIVILIZATIONS: ANTIQUITY TO 1500",
+      "grade": "A-",
+      "courseCode": "HIST1010",
+      "courseCredit": "3",
+      "academicYear": "2021-2022 SEMESTER 2"
+    },
+    {
+      "name": "HISTORICAL METHODS & WRITING",
+      "grade": "A",
+      "courseCode": "HIST1100",
+      "courseCredit": "4",
+      "academicYear": "2021-2022 SEMESTER 2"
+    },
+    {
+      "name": "AMERICAN HISTORY: COLONIAL PERIOD TO 1865",
+      "grade": "A+",
+      "courseCode": "HIST2001",
+      "courseCredit": "3",
+      "academicYear": "2022-2023 SEMESTER 1"
+    },
+    {
+      "name": "EAST ASIAN HISTORY",
+      "grade": "B",
+      "courseCode": "HIST2004",
+      "courseCredit": "3",
+      "academicYear": "2022-2023 SEMESTER 1"
+    },
+    {
+      "name": "HISTORY OF SOUTHEAST ASIA",
+      "grade": "B+",
+      "courseCode": "HIST2007",
+      "courseCredit": "3",
+      "academicYear": "2022-2023 SEMESTER 1"
+    },
+    {
+      "name": "HISTORIOGRAPHY: THEORY & PRACTICE",
+      "grade": "A-",
+      "courseCode": "HIST2100",
+      "courseCredit": "4",
+      "academicYear": "2022-2023 SEMESTER 2"
+    },
+    {
+      "name": "RENAISSANCE & REFORMATION EUROPE",
+      "grade": "A",
+      "courseCode": "HIST2201",
+      "courseCredit": "3",
+      "academicYear": "2022-2023 SEMESTER 2"
+    },
+    {
+      "name": "HISTORY OF THE MIDDLE EAST",
+      "grade": "S",
+      "courseCode": "HIST2305",
+      "courseCredit": "3",
+      "academicYear": "2022-2023 SEMESTER 2"
+    },
+    {
+      "name": "HISTORY OF POLITICAL THOUGHT",
+      "grade": "B-",
+      "courseCode": "HIST2310",
+      "courseCredit": "3",
+      "academicYear": "2023-2024 SEMESTER 1"
+    },
+    {
+      "name": "NATIONALISM & IMPERIALISM IN MODERN ERA",
+      "grade": "A",
+      "courseCode": "HIST3003",
+      "courseCredit": "3",
+      "academicYear": "2023-2024 SEMESTER 1"
+    },
+    {
+      "name": "HISTORY & FILM: DEPICTING THE PAST ON SCREEN",
+      "grade": "A-",
+      "courseCode": "HIST3010",
+      "courseCredit": "3",
+      "academicYear": "2023-2024 SEMESTER 1"
+    },
+    {
+      "name": "GENDER & SOCIETY IN HISTORY",
+      "grade": "PASS",
+      "courseCode": "HIST3101",
+      "courseCredit": "3",
+      "academicYear": "2023-2024 SEMESTER 2",
+      "S/U": "*"
+    },
+    {
+      "name": "HISTORY OF SCIENCE & TECHNOLOGY",
+      "grade": "B+",
+      "courseCode": "HIST3200",
+      "courseCredit": "3",
+      "academicYear": "2023-2024 SEMESTER 2"
+    },
+    {
+      "name": "GLOBAL INTELLECTUAL HISTORY",
+      "grade": "A",
+      "courseCode": "HIST3301",
+      "courseCredit": "3",
+      "academicYear": "2023-2024 SEMESTER 2"
+    },
+    {
+      "name": "PUBLIC HISTORY & ARCHIVAL STUDIES",
+      "grade": "A+",
+      "courseCode": "HIST3400",
+      "courseCredit": "3",
+      "academicYear": "2024-2025 SEMESTER 1"
+    },
+    {
+      "name": "HONOURS THESIS I",
+      "grade": "A",
+      "courseCode": "HIST4000",
+      "courseCredit": "6",
+      "academicYear": "2024-2025 SEMESTER 1"
+    },
+    {
+      "name": "HISTORICAL INTERPRETATION & ANALYSIS (CAPSTONE)",
+      "grade": "A-",
+      "courseCode": "HIST4100",
+      "courseCredit": "4",
+      "academicYear": "2024-2025 SEMESTER 2"
+    },
+    {
+      "name": "HONOURS THESIS II",
+      "grade": "A",
+      "courseCode": "HIST4099",
+      "courseCredit": "6",
+      "academicYear": "2024-2025 SEMESTER 2"
+    }
+  ]
+}
