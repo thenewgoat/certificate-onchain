@@ -15,7 +15,7 @@ npx hardhat compile
 ```shell
 npx hardhat run scripts/deploy.js --network polygonAmoy
 ```
-Follow the instructions in the console to verify the contract.
+Follow the instructions in the console to verify the contract.\
 5. Mint your new certificate!
 ```shell
 npx hardhat run scripts/mint.js --network polygonAmoy
