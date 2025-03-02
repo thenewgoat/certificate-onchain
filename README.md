@@ -17,14 +17,14 @@ To test your contract, run the following:
 npx hardhat test
 ```
 These are the current tests:\
-    Non-transferability\
-      √ should be soulbound (non-transferable)\
-    Issuer-Minter Interactions\
-      √ should allow designated minter to mint tokens\
-      √ should not allow issuer to mint tokens if they are not the designated minter\
-      √ should verify that issuer and minter are distinct accounts\
-    Burn Authorization Tests\
-      √ should allow burning only by the authorized party (IssuerOnly)\
-      √ should allow burning only by the token owner (OwnerOnly)\
-      √ should allow burning by either issuer or token owner (Both)\
-      √ should not allow burning for tokens with Neither authorization\
+&emsp;Non-transferability\
+&emsp;&emsp;√ should be soulbound (non-transferable)\
+&emsp;Issuer-Minter Interactions\
+&emsp;&emsp;√ should allow designated minter to mint tokens\
+&emsp;&emsp;√ should not allow issuer to mint tokens if they are not the designated minter\
+&emsp;&emsp;√ should verify that issuer and minter are distinct accounts\
+&emsp;Burn Authorization Tests\
+&emsp;&emsp;√ should allow burning only by the authorized party (IssuerOnly)\
+&emsp;&emsp;√ should allow burning only by the token owner (OwnerOnly)\
+&emsp;&emsp;√ should allow burning by either issuer or token owner (Both)\
+&emsp;&emsp;√ should not allow burning for tokens with Neither authorization\
