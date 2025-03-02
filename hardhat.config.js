@@ -2,6 +2,7 @@ require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 
 const { METAMASK_PRIVATE_KEY } = process.env;
+const { POLYGONSCAN_API_KEY } = process.env;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 
@@ -24,4 +25,11 @@ module.exports = {
       accounts: [METAMASK_PRIVATE_KEY],              // use the private key from .env
     },
   },
+  etherscan: {
+    apiKey: {
+      polygonAmoy: [POLYGONSCAN_API_KEY],
+      // polygonMumbai: "YOUR_POLYGONSCAN_API_KEY"
+    }
+  },
+
 };

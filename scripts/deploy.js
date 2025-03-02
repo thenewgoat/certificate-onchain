@@ -21,12 +21,17 @@ async function main() {
   const transcriptData = fs.readFileSync(filePath, { encoding: "utf8" });
   console.log("Certificate file read successfully.");
 
+  const sanitizedTranscript = transcriptData
+  .replace(/"/g, '\\"')        // Escape double quotes
+  .replace(/\r?\n/g, "\\n");   // Replace newlines with \n
+
   // 2. Get the contract factory for SoulboundCert
   const CertificateNFT = await hre.ethers.getContractFactory("SoulboundCert");
   console.log("Got the SoulboundCert contract factory. Deploying now...");
 
   // 3. Get the deployer (which will serve as the minter)
   const [deployer] = await ethers.getSigners();
+  console.log("Deployer (minter) address:", deployer.address);
 
   // 4. Deploy the contract.
   // Note: The contract constructor now accepts: name, symbol, transcript, issuer, and minter.
@@ -38,7 +43,6 @@ async function main() {
     issuerAddress,
     deployer.address
   );
-  console.log("Transaction submitted. Waiting for deployment...");
 
   // 5. Wait for the contract deployment to be confirmed
   await nftContract.waitForDeployment();
@@ -62,6 +66,12 @@ async function main() {
   // 7. Retrieve the owner of the minted token (tokenId 0)
   const ownerOfTokenZero = await nftContract.ownerOf(0);
   console.log("Owner of token #0 is:", ownerOfTokenZero);
+
+  console.log("\n--- COPY & PASTE THIS TO VERIFY ON WINDOWS CMD ---\n");
+  console.log(
+    `npx hardhat verify --network polygonAmoy ${contractAddress} "CertificateNFT" "TNFT" "${sanitizedTranscript}" "${issuerAddress}" "${deployer.address}"`
+  );
+  console.log("\n---------------------------------------------\n");
 }
 
 main().catch((error) => {
