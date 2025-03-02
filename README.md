@@ -2,16 +2,27 @@
 
 This repository deploys the certificate tokens on PolygonAmoy.
 
-1. Navigate to your directory.
-2. Compile the contract.
+1. Navigate to your directory.\
+2. Make necessary changes to the deployment script.\
+&emsp;&emsp;2a. Define these environment variables: METAMASK_PRIVATE_KEY, RECEIVER_ADDRESS, ISSUER_ADDRESS, BASE_URI, CONTRACT_ADDRESS (after successfuly deployment)
+\
+3. Compile the contract.
 ```shell
 npx hardhat clean
 npx hardhat compile
 ```
-3. Deploy the contracts.
+\\
+4. Deploy the contract.
 ```shell
 npx hardhat run scripts/deploy.js --network polygonAmoy
 ```
+Follow the instructions in the console to verify the contract.\
+5. Mint your new certificate!
+```shell
+npx hardhat run scripts/mint.js --network polygonAmoy
+```
+Make sure to update IPFS with the relevant metadata.json files. Formatting for tokenURI is ${baseURI}/${tokenID}.json
+
 
 #### Testing
 To test your contract, run the following:
