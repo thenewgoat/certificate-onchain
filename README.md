@@ -1,5 +1,7 @@
 # How to use
 
+This repository deploys the certificate tokens on PolygonAmoy.
+
 1. Navigate to your directory.
 2. Compile the contract.
 ```shell
