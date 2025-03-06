@@ -10,6 +10,8 @@ const hre = require("hardhat");
 // 2. baseURI
 // 3. orgDescription
 
+// To customise the script for other use cases, ctrl+F "CUSTOMISE" to find the relevant sections to modify
+
 async function main() {
   console.log("Starting deployment script...");
 
@@ -28,8 +30,8 @@ async function main() {
   console.log("Base URI:", baseURI);
 
   // 2. Optionally read an organization-level description from a file
-  const filePath = "./stores/sample_org_description.txt";
-  let orgDescription = "Default organization description";
+  const filePath = "./stores/sample_org_description.txt"; 
+  let orgDescription = "This smart contract securely stores and manages NTU CCA record NFTs on the blockchain."; //CUSTOMISE
   try {
     orgDescription = fs.readFileSync(filePath, "utf8");
     console.log("Organization description read from file.");
@@ -55,9 +57,9 @@ async function main() {
   //   string memory baseURI_
   // )
   const nftContract = await SoulboundCert.deploy(
-    "MyOrgCertificates", // name_
-    "MOC",               // symbol_
-    orgDescription,      // contractDescription_
+    "NTU_CCA_Records",   // name_                   //CUSTOMISE
+    "NTUCCA",               // symbol_              //CUSTOMISE
+    orgDescription,      // contractDescription_    //CUSTOMISE
     issuerAddress,       // issuer_
     deployer.address,    // minter_
     baseURI              // e.g. "ipfs://QmXYZ123/"
@@ -69,6 +71,8 @@ async function main() {
   console.log("SoulboundCert deployed to:", contractAddress);
 
   // 6.Mint first token (tokenid = 0) to deployer/minter
+
+  //CUSTOMISE -- Can choose to not mint first NFT
   console.log("Minting a sample certificate to the receiver with BurnAuth = IssuerOnly (0)...");
   const tx = await nftContract.issueCertificate(
     deployer.address, // to
